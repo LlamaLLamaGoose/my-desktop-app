@@ -56,10 +56,12 @@ class Desktop extends Component {
     const { updateZ } = this;
 
     return (
-      <div className="Desktop dark:bg-gray-600">
-        <h1>react-rnd</h1>
-        <Draggable action={updateZ} zLevel={zLevel} />
-        <Draggable action={updateZ} zLevel={zLevel} />
+      <div className="desktop dark:bg-gray-600 w-screen h-screen overflow-hidden">
+        <div>
+          <h1>react-rnd</h1>
+          <Draggable action={updateZ} zLevel={zLevel} />
+          <Draggable action={updateZ} zLevel={zLevel} />
+        </div>
       </div>
     );
   }

@@ -36,8 +36,10 @@ class Draggable extends Component {
       return (
       <Rnd
       onMouseDown={isClicked}
+      onResizeStart={isClicked}
       disableDragging={false}
       dragHandleClassName={"handle"}
+      bounds={".desktop"}
       minHeight={"200px"}
       style={{
         boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
