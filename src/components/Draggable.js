@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Rnd } from "react-rnd";
 
+import "../assets/main.css";
+
 class Draggable extends Component {
   constructor(props) {
     super(props);

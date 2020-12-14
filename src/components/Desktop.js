@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import Draggable from "./Draggable";
 
-import "../styles.css";
+import "../assets/main.css";
 
 class Desktop extends Component {
   constructor(props) {
@@ -56,7 +56,7 @@ class Desktop extends Component {
     const { updateZ } = this;
 
     return (
-      <div className="Desktop">
+      <div className="Desktop dark:bg-gray-600">
         <h1>react-rnd</h1>
         <Draggable action={updateZ} zLevel={zLevel} />
         <Draggable action={updateZ} zLevel={zLevel} />
