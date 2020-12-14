@@ -1,0 +1,12 @@
+html,
+body {
+  width: 100%;
+  min-height: 100%
+}
+.Desktop {
+  font-family: sans-serif;
+  text-align: center;
+}
+* {
+  box-sizing: border-box;
+}

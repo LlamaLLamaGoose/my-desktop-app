@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+// Imports
+import React, { Component } from "react";
+import Desktop from "./components/Desktop";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./styles.css";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    //this.something = this.something.bind(this);
+    this.state = {
+      zLevel: null,
+      //var: null,
+    };
+  }
+
+  render() {
+    const {
+      //props
+    } = this.props;
+    const {
+      //states
+    } = this.state;
+    const {
+      // functions
+    } = this;
+
+    return <Desktop />;
+  }
 }
 
 export default App;
