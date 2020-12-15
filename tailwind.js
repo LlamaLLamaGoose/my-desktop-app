@@ -3,7 +3,7 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   purge: [],
   presets: [],
-  darkMode: 'media':, // or 'media' or 'class'
+  darkMode: 'media', // or 'media' or 'class'
   theme: {
     screens: {
       sm: '640px',
@@ -18,7 +18,7 @@ module.exports = {
 
       black: colors.black,
       white: colors.white,
-      gray: colors.coolGray,
+      gray: colors.trueGray,
       red: colors.red,
       yellow: colors.amber,
       green: colors.emerald,
@@ -146,7 +146,10 @@ module.exports = {
     divideColor: (theme) => theme('borderColor'),
     divideOpacity: (theme) => theme('borderOpacity'),
     divideWidth: (theme) => theme('borderWidth'),
-    fill: { current: 'currentColor' },
+    fill: { 
+      current: 'currentColor',
+      none: 'none'
+    },
     flex: {
       1: '1 1 0%',
       auto: '1 1 auto',
