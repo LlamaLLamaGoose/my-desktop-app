@@ -8,15 +8,25 @@ class Draggable extends Component {
     super(props);
     //this.something = this.something.bind(this);
     this.state = {
-      zLevel: null,
-      element: null,
-      prevWidth: null,
+      isFullScreen: null,
       prevHeight: null,
+      prevWidth: null,
       prevX: null,
       prevY: null,
+      zLevel: null,
       //var: null,
     };
   }
+
+  getTranslateXY(element) {
+    const style = window.getComputedStyle(element);
+    const matrix = new DOMMatrixReadOnly(style.transform);
+    return {
+      translateX: matrix.m41,
+      translateY: matrix.m42,
+    };
+  }
+
   isClicked = () => {
     this.props.action();
     this.setState({
@@ -26,12 +36,14 @@ class Draggable extends Component {
 
   setFullScreen = () => {
     let element = this.rnd.getSelfElement();
-    console.log(element);
+    let windowPos = this.getTranslateXY(element);
     this.setState(
       {
         prevHeight: element.style.height,
         prevWidth: element.style.width,
-
+        prevX: windowPos.translateX,
+        prevY: windowPos.translateY,
+        isFullScreen: true,
       },
       () => {
         this.rnd.updateSize({
@@ -47,24 +59,19 @@ class Draggable extends Component {
   };
 
   setRestoreDown = () => {
-    let element = this.rnd.getSelfElement();
-    let elementDrag = this.rnd.getDraggablePosition();
-    console.log(elementDrag)
-    this.rnd.updateSize({
-      width: this.state.prevWidth,
-      height: this.state.prevWidth,
-    });
     this.setState(
       {
-        prevHeight: element.style.height,
-        prevWidth: element.style.width,
+        isFullScreen: false,
       },
       () => {
-        
-        /* this.rnd.updatePosition({
-          x: 0,
-          y: 0,
-        }); */
+        this.rnd.updateSize({
+          width: this.state.prevWidth,
+          height: this.state.prevWidth,
+        });
+        this.rnd.updatePosition({
+          x: this.state.prevX,
+          y: this.state.prevY,
+        });
       }
     );
   };
@@ -73,12 +80,12 @@ class Draggable extends Component {
     const {
       //props
     } = this.props;
-    const { zLevel } = this.state;
     const {
-      isClicked,
-      setFullScreen,
-      // functions
-    } = this;
+      isFullScreen,
+      zLevel,
+      //states
+    } = this.state;
+    const { isClicked, setFullScreen, setRestoreDown } = this;
 
     const dragWindow = () => {
       return (
@@ -115,6 +122,7 @@ class Draggable extends Component {
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
+                    fill="none"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -123,13 +131,14 @@ class Draggable extends Component {
                     <line x1="5" y1="12" x2="19" y2="12" />
                   </svg>
                 </div>
-                <div className="px-2 hidden">
+                <div className={`px-2 ${isFullScreen ? 'null': 'hidden'}`} onMouseDown={setRestoreDown}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-minimize stroke-current fill-none dark:text-gray-200 text-gray-800"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
+                    fill="none"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinecap="round"
@@ -141,13 +150,14 @@ class Draggable extends Component {
                     <path d="M5 9h2a2 2 0 0 0 2 -2v-2" />
                   </svg>
                 </div>
-                <div className="px-2" onMouseDown={setFullScreen}>
+                <div className={`px-2 ${isFullScreen ? 'hidden' : 'null'}`} onMouseDown={setFullScreen}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-maximize stroke-current fill-none dark:text-gray-200 text-gray-800 hover:text-gray-50"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
+                    fill="none"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinecap="round"
@@ -167,6 +177,7 @@ class Draggable extends Component {
                     height="24"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
+                    fill="none"
                     strokeLinecap="round"
                     strokeLinecap="round"
                   >
