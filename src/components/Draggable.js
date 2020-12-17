@@ -56,9 +56,12 @@ class Draggable extends Component {
           x: 0,
           y: 0,
         });
-        console.log(this.state.prevHeight, this.state.prevWidth)
       }
     );
+    this.rnd.updatePosition({
+      x: this.state.prevX,
+      y: this.state.prevY,
+    });
   };
 
   setRestoreDown = () => {
@@ -78,6 +81,10 @@ class Draggable extends Component {
         });
       }
     );
+    this.rnd.updatePosition({
+      x: this.state.prevX,
+      y: this.state.prevY,
+    });
   };
 
   render() {
