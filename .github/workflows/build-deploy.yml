@@ -30,4 +30,4 @@ jobs:
           username: ${{secrets.SERVER_USERNAME}}
           password: ${{secrets.SERVER_PASSWORD}}
           port: ${{ secrets.SERVER_PORT }}
-          script: cd ${{secrets.PROJECT_PATH}} && git pull && yarn && yarn build && mv -f my/* ../.././public_html/my
+          script: cd ${{secrets.PROJECT_PATH}} && git pull && yarn && yarn build && rsync -av build/ ../.././public_html/my
