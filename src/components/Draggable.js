@@ -49,13 +49,14 @@ class Draggable extends Component {
       },
       () => {
         this.rnd.updateSize({
-          height: "100%",
-          width: "100%",
+          height: "100vh",
+          width: "100vw",
         });
         this.rnd.updatePosition({
           x: 0,
           y: 0,
         });
+        console.log(this.state.prevHeight, this.state.prevWidth)
       }
     );
   };
@@ -68,7 +69,7 @@ class Draggable extends Component {
       },
       () => {
         this.rnd.updateSize({
-          height: this.state.prevWidth,
+          height: this.state.prevHeight,
           width: this.state.prevWidth,
         });
         this.rnd.updatePosition({
