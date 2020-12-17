@@ -4,9 +4,9 @@ name: build-deploy
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
+  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ main ]
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -30,4 +30,4 @@ jobs:
           username: ${{secrets.SERVER_USERNAME}}
           password: ${{secrets.SERVER_PASSWORD}}
           port: ${{ secrets.SERVER_PORT }}
-          script: cd ${{secrets.PROJECT_PATH}} && git pull && yarn && yarn build
+          script: cd ${{secrets.PROJECT_PATH}} && git pull && yarn && yarn build && mv -f my/* ../.././public_html/my
