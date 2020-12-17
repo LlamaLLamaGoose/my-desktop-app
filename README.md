@@ -1,6 +1,40 @@
 # Todo
-Draggable
- -> add a fullscreen/
+
+## Taskbar
+- [ ] Start/Windows button
+    - [ ] Settings
+        - [ ] Change theme/dark mode?
+        - [ ] Font size?
+    - [ ] Terminal?
+        - [ ] https://github.com/xtermjs/xterm.js/
+        - [ ] Create a few commands to display some info in the terminal?
+    - [ ] Task Manager?
+        - [ ] Allow to see running apps
+            - [ ] Close apps from within it?
+- [ ] Opened draggables
+    - [ ] Clicking this will need to focus the draggable and move it to the top
+- [ ] Time/date
+    - [ ] Clicking it opens a clock?
+
+## Desktop
+- [ ] Add Apps/DraggableIcons
+    - [ ] If you click the icon while it's open, it should focus the draggable and increase it's zIndex so it's at the open again.
+    - [ ] On a grid?
+        - [ ] I'll need to see if I can do something to prevent being able to overlap them
+- [ ] Some more fancy background?
+    - [ ] Something animated using js/css or something using ThreeJS
+
+## Draggables
+- [x] Import Rnd (Resize and drag)
+- [x] Set the Bounds to stay on the desktop
+- [x] Add Minimize / FullScreen/Restore and Close
+    - [x] Adding FullScreen
+    - [x] Adding Restore
+    - [ ] Adding Minimize
+            - [ ] for minimize I'll need to add a taskbar so you can see it and reopen it when it's minimized.
+                        - [ ] If you click the icon while it's minimized, it should show it again
+    - [ ] Adding Close
+        - [ ] For open/close I'll need to add icons that you can double click to open up the draggable and to close it
 
 
 # Getting Started with Create React App
@@ -36,7 +70,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [ ]- [ ]Note: this is a one-way operation. Once you `eject`, you can’t go back!- [ ]- [ ]
 
 If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
