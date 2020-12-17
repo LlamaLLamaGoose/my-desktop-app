@@ -8,6 +8,7 @@ class Draggable extends Component {
     super(props);
     //this.something = this.something.bind(this);
     this.state = {
+      isDraggable: true,
       isFullScreen: null,
       prevHeight: null,
       prevWidth: null,
@@ -39,16 +40,17 @@ class Draggable extends Component {
     let windowPos = this.getTranslateXY(element);
     this.setState(
       {
+        isDraggable: false,
+        isFullScreen: true,
         prevHeight: element.style.height,
         prevWidth: element.style.width,
         prevX: windowPos.translateX,
         prevY: windowPos.translateY,
-        isFullScreen: true,
       },
       () => {
         this.rnd.updateSize({
-          width: "100%",
           height: "100%",
+          width: "100%",
         });
         this.rnd.updatePosition({
           x: 0,
@@ -61,12 +63,13 @@ class Draggable extends Component {
   setRestoreDown = () => {
     this.setState(
       {
+        isDraggable: true,
         isFullScreen: false,
       },
       () => {
         this.rnd.updateSize({
-          width: this.state.prevWidth,
           height: this.state.prevWidth,
+          width: this.state.prevWidth,
         });
         this.rnd.updatePosition({
           x: this.state.prevX,
@@ -81,6 +84,7 @@ class Draggable extends Component {
       //props
     } = this.props;
     const {
+      isDraggable,
       isFullScreen,
       zLevel,
       //states
@@ -96,6 +100,7 @@ class Draggable extends Component {
           onMouseDown={isClicked}
           onResizeStart={isClicked}
           disableDragging={false}
+          enableResizing={isDraggable}
           dragHandleClassName={"handle"}
           bounds={".desktop"}
           minHeight={"200px"}
@@ -105,10 +110,10 @@ class Draggable extends Component {
             zIndex: zLevel,
           }}
           default={{
+            height: 320,
+            width: 500,
             x: 0,
             y: 0,
-            width: 500,
-            height: 320,
           }}
         >
           <div className="window flex flex-col h-full">
