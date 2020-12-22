@@ -1,4 +1,4 @@
-import React, { Component, createRef, useRef } from "react";
+import React, { Component } from "react";
 import { Rnd } from "react-rnd";
 
 import "../assets/main.css";
@@ -15,9 +15,30 @@ class Draggable extends Component {
       prevX: null,
       prevY: null,
       zLevel: null,
-      //var: null,
     };
   }
+
+  updatePosition = (x, y) => {
+    let promise = new Promise((resolve, reject) => {
+      this.rnd.updatePosition({
+        x: x,
+        y: y,
+      });
+      resolve(true);
+    });
+    return promise;
+  };
+
+  updateSize = (h, w) => {
+    let promise = new Promise((resolve, reject) => {
+      this.rnd.updateSize({
+        height: h,
+        width: w,
+      });
+      resolve(true);
+    });
+    return promise;
+  };
 
   getTranslateXY(element) {
     const style = window.getComputedStyle(element);
@@ -48,20 +69,11 @@ class Draggable extends Component {
         prevY: windowPos.translateY,
       },
       () => {
-        this.rnd.updateSize({
-          height: "100vh",
-          width: "100vw",
-        });
-        this.rnd.updatePosition({
-          x: 0,
-          y: 0,
-        });
+        this.updateSize("100vh", "100vw").then(
+          this.updatePosition(0, 0)
+        );
       }
     );
-    this.rnd.updatePosition({
-      x: this.state.prevX,
-      y: this.state.prevY,
-    });
   };
 
   setRestoreDown = () => {
@@ -71,20 +83,11 @@ class Draggable extends Component {
         isFullScreen: false,
       },
       () => {
-        this.rnd.updateSize({
-          height: this.state.prevHeight,
-          width: this.state.prevWidth,
-        });
-        this.rnd.updatePosition({
-          x: this.state.prevX,
-          y: this.state.prevY,
-        });
+        this.updateSize(this.state.prevHeight, this.state.prevWidth).then(
+          this.updatePosition(this.state.prevX, this.state.prevY)
+        );
       }
     );
-    this.rnd.updatePosition({
-      x: this.state.prevX,
-      y: this.state.prevY,
-    });
   };
 
   render() {
@@ -107,7 +110,7 @@ class Draggable extends Component {
           }}
           onMouseDown={isClicked}
           onResizeStart={isClicked}
-          disableDragging={false}
+          disableDragging={isFullScreen}
           enableResizing={isDraggable}
           dragHandleClassName={"handle"}
           bounds={".desktop"}
@@ -144,7 +147,10 @@ class Draggable extends Component {
                     <line x1="5" y1="12" x2="19" y2="12" />
                   </svg>
                 </div>
-                <div className={`px-2 ${isFullScreen ? 'null': 'hidden'}`} onMouseDown={setRestoreDown}>
+                <div
+                  className={`px-2 ${isFullScreen ? "null" : "hidden"}`}
+                  onMouseDown={setRestoreDown}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-minimize stroke-current fill-none dark:text-gray-200 text-gray-800"
@@ -163,7 +169,10 @@ class Draggable extends Component {
                     <path d="M5 9h2a2 2 0 0 0 2 -2v-2" />
                   </svg>
                 </div>
-                <div className={`px-2 ${isFullScreen ? 'hidden' : 'null'}`} onMouseDown={setFullScreen}>
+                <div
+                  className={`px-2 ${isFullScreen ? "hidden" : "null"}`}
+                  onMouseDownCapture={setFullScreen}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-maximize stroke-current fill-none dark:text-gray-200 text-gray-800 hover:text-gray-50"
