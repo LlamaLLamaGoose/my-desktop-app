@@ -1,6 +1,7 @@
 // Imports
 import React, { Component } from "react";
 import Draggable from "./Draggable";
+import Taskbar from "./Taskbar";
 
 import "../assets/main.css";
 
@@ -63,14 +64,17 @@ class Desktop extends Component {
 
     return (
       <div className="relative h-screen w-screen overflow-hidden">
-        <div className="desktop dark:bg-blueGray-600 w-full h-full absolute">
-          <div className="flex full-width justify-center">
+        <div className="desktop absolute dark:bg-blueGray-600 w-full h-full flex flex-col justify-between">
+          <div className="flex full-width justify-center mb-auto h-10">
             <div className="font-medium text-lg">
-              react-my-desktop-app - version 0.0.1 - last updated 23/12/2020
+              react-my-desktop-app - version 0.0.2 - last updated 23/12/2020
             </div>
           </div>
           <Draggable action={updateZ} zLevel={zLevel} />
           <Draggable action={updateZ} zLevel={zLevel} />
+          <div className="taskbar relative h-12 bg-gray-500">
+            <Taskbar />
+          </div>
         </div>
       </div>
     );
