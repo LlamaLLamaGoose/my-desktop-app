@@ -100,7 +100,12 @@ class Draggable extends Component {
       zLevel,
       //states
     } = this.state;
-    const { isClicked, setFullScreen, setRestoreDown } = this;
+    const {
+      isClicked,
+      setFullScreen,
+      setRestoreDown,
+      //functions
+    } = this;
 
     const dragWindow = () => {
       return (
