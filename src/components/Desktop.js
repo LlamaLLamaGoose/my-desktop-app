@@ -67,7 +67,7 @@ class Desktop extends Component {
         <div className="desktop absolute dark:bg-blueGray-600 w-full h-full flex flex-col justify-between">
           <div className="flex full-width justify-center mb-auto h-10">
             <div className="font-medium text-lg">
-              react-my-desktop-app - version 0.0.1 - last updated 23/12/2020
+              react-my-desktop-app - version 0.0.2 - last updated 23/12/2020
             </div>
           </div>
           <Draggable action={updateZ} zLevel={zLevel} />
