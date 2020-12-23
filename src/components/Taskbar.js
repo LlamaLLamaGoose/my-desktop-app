@@ -13,6 +13,14 @@ class Taskbar extends Component {
     };
   }
 
+  componentDidMount() {
+    this.interval = setInterval(() => this.setState({ time: Date.now() }), 1000);
+    console.log(this.interval)
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   render() {
     const {
       //props
